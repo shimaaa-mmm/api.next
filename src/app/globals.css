@@ -1,0 +1,33 @@
+@import url('../../public/iran-sans-web/fontiran.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-iran: 'IRANSans', sans-serif;
+  
+  --color-background: #ffffff;
+  --color-buttom: #e1f0f8;
+  --color-titles: #000000;
+  --color-title-buttom: #44618d;
+  --color-headerBtt: #ff9408;
+  --color-headerGee: #14bc84;
+  --color-title-header: #4D5766;
+  --color-borderClr: #d2d2d2;
+  --color-textClr: rgb(28, 62, 117);
+  --color-borclr: rgb(222, 240, 252);
+  --color-hoverClr: #07b2b2;
+  --color-teXt: #4D5766;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-iran);
+  }
+
+  p {
+    @apply leading-8;
+  }
+}
+
