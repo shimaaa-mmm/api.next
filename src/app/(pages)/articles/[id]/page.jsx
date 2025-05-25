@@ -4,10 +4,10 @@ import ArticleImageClient from "../../../../utils/ArticleImageClient";
 import Link from "next/link";
 
 async function fetchImages() {
-  const res = await fetch('https://api.dev.adlara.ir/Landing/Articles', {
-    cache: 'no-store',
+  const res = await fetch("https://api.dev.adlara.ir/Landing/Articles", {
+    cache: "no-store",
   });
-  if (!res.ok) throw new Error('Failed to fetch images');
+  if (!res.ok) throw new Error("Failed to fetch images");
   const data = await res.json();
   return data.data.articles;
 }
@@ -31,7 +31,7 @@ export default async function ArticleDetail({ params }) {
   try {
     images = await fetchImages();
   } catch (error) {
-    console.error('Error fetching images:', error);
+    console.error("Error fetching images:", error);
   }
 
   let arrangedImages = [];
@@ -59,7 +59,9 @@ export default async function ArticleDetail({ params }) {
         </p>
 
         <div className="flex justify-start gap-3 text-sm text-gray-500 mb-1 border-b border-gray-300 pb-2">
-          <span>تاریخ: {article.createDateTime_InUtc}</span>
+          <div>
+            {new Date(article.createDateTime_InUtc).toLocaleDateString("fa-IR")}
+          </div>
         </div>
 
         <div className="flex gap-6 py-2">
@@ -86,8 +88,12 @@ export default async function ArticleDetail({ params }) {
                     className="w-full h-full object-cover rounded-xl transition duration-300 ease-in-out hover:scale-105 hover:opacity-90"
                   />
                   <div className="absolute bottom-0 w-full bg-[#9ca3af61] text-center text-sm py-3 px-2">
-                    <div className="text-black text-[15px] font-bold">{item.title}</div>
-                    <div className="text-black text-[13px]">{item.createDateTime_InUtc}</div>
+                    <div className="text-black text-[15px] font-bold">
+                      {item.title}
+                    </div>
+                    <div className="text-black text-[13px]">
+                      <div>{new Date(article.createDateTime_InUtc).toLocaleDateString('fa-IR')}</div>
+                    </div>
                   </div>
                 </div>
               </Link>

@@ -6,9 +6,9 @@ import Layout from "../../../../layouts/Layout";
 import ArticleImageClient from "../../../../utils/ArticleImageClient";
 
 // اضافه کردن ایمپورت‌های MUI برای لودینگ
-import * as React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 export default function ArticleDetail({ params }) {
   const { id } = params;
@@ -25,7 +25,7 @@ export default function ArticleDetail({ params }) {
         const resArticlePromise = fetch(
           `https://api.dev.adlara.ir/Landing/Articles/${id}`,
           { cache: "no-store" }
-        ).then(res => {
+        ).then((res) => {
           if (!res.ok) throw new Error("خطا در دریافت مقاله");
           return res.json();
         });
@@ -33,15 +33,18 @@ export default function ArticleDetail({ params }) {
         const resImagesPromise = fetch(
           "https://api.dev.adlara.ir/Landing/Articles",
           { cache: "no-store" }
-        ).then(res => {
+        ).then((res) => {
           if (!res.ok) throw new Error("خطا در دریافت تصاویر");
           return res.json();
         });
 
-        const [articleData, imagesData] = await Promise.all([resArticlePromise, resImagesPromise]);
+        const [articleData, imagesData] = await Promise.all([
+          resArticlePromise,
+          resImagesPromise,
+        ]);
 
         // اضافه کردن حداقل 2 ثانیه لودینگ
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
         setArticle(articleData.data);
         setImages(imagesData.data.articles);
@@ -59,7 +62,7 @@ export default function ArticleDetail({ params }) {
     return (
       <Layout>
         <div className="flex justify-center items-center h-[60vh]" dir="rtl">
-          <Box sx={{ display: 'flex' }}>
+          <Box sx={{ display: "flex" }}>
             <CircularProgress />
           </Box>
         </div>
@@ -90,7 +93,8 @@ export default function ArticleDetail({ params }) {
       <div className="max-w-[60rem] mx-auto p-4 mt-[44px]" dir="rtl">
         <video
           controls
-          className="w-full rounded-lg max-w-[700px] max-h-[500px] mx-auto mb-10"
+          className="w-full rounded-lg max-w-[700px] max-h-[500px] mx-auto mb-10 border-2 border-black bg-[#adadad]
+"
           src={article.videoUrl}
         >
           مرورگر شما تگ ویدیو را پشتیبانی نمی‌کند.
@@ -104,7 +108,9 @@ export default function ArticleDetail({ params }) {
         </p>
 
         <div className="flex justify-start gap-3 text-sm text-gray-500 mb-1 border-b border-gray-300 pb-2">
-          <span>تاریخ: {article.createDateTime_InUtc}</span>
+          <div>
+            {new Date(article.createDateTime_InUtc).toLocaleDateString("fa-IR")}
+          </div>
         </div>
 
         <div className="tags mt-6 pt-4 px-4 flex flex-wrap gap-6">
@@ -131,7 +137,7 @@ export default function ArticleDetail({ params }) {
                     {item.title}
                   </div>
                   <div className="text-black text-[13px]">
-                    {item.createDateTime_InUtc}
+                      <div>{new Date(article.createDateTime_InUtc).toLocaleDateString('fa-IR')}</div>
                   </div>
                 </div>
               </Link>
