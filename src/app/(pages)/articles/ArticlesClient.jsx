@@ -145,7 +145,7 @@ export default function ArticlesClient() {
               article ? (
                 <div
                   key={article.id}
-                  className="relative w-full max-w-[366px] h-[332px] rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer"
+                  className="relative w-full max-w-[366px] h-[332px] rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer mx-auto"
                 >
                   <Link href={`/articles/${article.id}`} className="block w-full h-full">
                     <ArticleImageClient
@@ -160,7 +160,7 @@ export default function ArticlesClient() {
                   </Link>
                 </div>
               ) : (
-                <div key={`empty-${i}`} className="w-full max-w-[366px] h-[332px] rounded-xl bg-transparent"></div>
+                <div key={`empty-${i}`} className="w-full max-w-[366px] h-[332px] rounded-xl bg-transparent mx-auto"></div>
               )
             )}
           </div>

@@ -22,7 +22,17 @@ module.exports = {
         teXt: "#4D5766",
       },
       borderRadius: {
-        card: '20px', 
+        card: '20px',
+        '11px': '11px',       
+      },
+      keyframes: {
+        'slide-glass': {
+          '0%, 100%': { left: '-50%' },
+          '50%': { left: '150%' },
+        },
+      },
+      animation: {
+        'slide-glass': 'slide-glass 2s ease-in-out infinite',
       },
     },
   },

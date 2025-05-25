@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Layout from "../../../../layouts/Layout";
 import ArticleImageClient from "../../../../utils/ArticleImageClient";
-
-// اضافه کردن ایمپورت‌های MUI برای لودینگ
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -119,7 +117,13 @@ export default function ArticleDetail({ params }) {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 w-[121%] mr-[-95px] lg:grid-cols-3 mt-16 gap-8 justify-center mb-6">
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16 mb-6
+             w-full mx-auto
+             justify-items-center
+             sm:w-auto sm:mx-0
+             lg:w-[121%] lg:mr-[-95px]"
+        >
           {arrangedImages.length > 0 ? (
             arrangedImages.map((item, i) => (
               <Link
@@ -137,7 +141,11 @@ export default function ArticleDetail({ params }) {
                     {item.title}
                   </div>
                   <div className="text-black text-[13px]">
-                      <div>{new Date(article.createDateTime_InUtc).toLocaleDateString('fa-IR')}</div>
+                    <div>
+                      {new Date(
+                        article.createDateTime_InUtc
+                      ).toLocaleDateString("fa-IR")}
+                    </div>
                   </div>
                 </div>
               </Link>

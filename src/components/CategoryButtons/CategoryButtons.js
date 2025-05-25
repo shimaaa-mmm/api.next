@@ -1,14 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CircularProgress } from '@mui/material';
+
+import './CategoryButtons.css';
 
 export default function CategoryButtons({ counts = {} }) {
   const pathname = usePathname();
   const [active, setActive] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleClick = (category) => {
     setActive(category);
@@ -21,23 +28,20 @@ export default function CategoryButtons({ counts = {} }) {
   const isActive = (categoryPath) =>
     active === categoryPath || pathname === categoryPath;
 
-  const buttonClass = (categoryPath) => {
-    const base =
-      'w-[249px] h-[57px] flex items-center justify-center gap-2 px-4 py-2 rounded-[11px] text-[16px] transition-colors';
-    const bg = loading && active === categoryPath
-      ? 'bg-[#0A3E61] text-white' 
-      : isActive(categoryPath)
-      ? 'bg-[#0F5986] text-white'
-      : 'bg-[#E1F0F8] text-[rgb(27,61,115)]';
-    return `${base} ${bg}`;
-  };
+  if (!mounted) return null;
 
   return (
-    <div className="flex justify-center gap-4 mb-8 mt-[55px]" dir="rtl">
+    <div className="category-buttons-container">
       <Link
         href="/articles"
         onClick={() => handleClick('/articles')}
-        className={buttonClass('/articles')}
+        className={`category-button glass-hover ${
+          loading && active === '/articles'
+            ? 'loading'
+            : isActive('/articles')
+            ? 'active'
+            : ''
+        } half-width`}
       >
         {loading && active === '/articles' && (
           <CircularProgress size={16} color="inherit" />
@@ -48,7 +52,13 @@ export default function CategoryButtons({ counts = {} }) {
       <Link
         href="/videos"
         onClick={() => handleClick('/videos')}
-        className={buttonClass('/videos')}
+        className={`category-button glass-hover ${
+          loading && active === '/videos'
+            ? 'loading'
+            : isActive('/videos')
+            ? 'active'
+            : ''
+        } half-width`}
       >
         {loading && active === '/videos' && (
           <CircularProgress size={16} color="inherit" />
@@ -59,7 +69,13 @@ export default function CategoryButtons({ counts = {} }) {
       <Link
         href="/podcasts"
         onClick={() => handleClick('/podcasts')}
-        className={buttonClass('/podcasts')}
+        className={`category-button glass-hover ${
+          loading && active === '/podcasts'
+            ? 'loading'
+            : isActive('/podcasts')
+            ? 'active'
+            : ''
+        }`}
       >
         {loading && active === '/podcasts' && (
           <CircularProgress size={16} color="inherit" />

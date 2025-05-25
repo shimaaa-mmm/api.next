@@ -168,19 +168,26 @@ export default function Home() {
             disabled={buttonLoading}
             className="rounded-lg"
             sx={{
-              backgroundColor: '#1B3B71',
+              background: 'linear-gradient(135deg, #1B3B71 0%, #19949a 100%)',
               color: '#fff',
               fontSize: '14px',
               padding: '7px 55px',
               mt: 3,
               mb: 5,
-              '&.MuiLoadingButton-root': { backgroundColor: '#1B3B71' },
-              '&:hover': { backgroundColor: '#19949a' },
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.25)',
+              '&.MuiLoadingButton-root': {
+                background: 'linear-gradient(135deg, #1B3B71 0%, #19949a 100%)',
+              },
+              '&:hover': {
+                background: 'linear-gradient(135deg, #19949a 0%, #1B3B71 100%)',
+                boxShadow: '0 6px 15px rgba(0, 0, 0, 0.35)',
+              },
             }}
           >
             نمایش بیشتر
           </LoadingButton>
         )}
+
 
         {showAll && <PaginationRounded count={totalPages} onPageChange={handlePageChange} />}
       </div>
